@@ -1,0 +1,58 @@
+create database Tourism;
+use Tourism;
+
+create table Destination
+(
+    des_ID       int auto_increment primary key,
+    des_name     varchar(30),
+    description  varchar(200),
+    cost_average double,
+    city_id      int,
+    foreign key (city_id) references City (city_ID)
+);
+
+create table City
+(
+    city_ID   int auto_increment primary key,
+    city_Name varchar(30)
+);
+
+create table Tourist
+(
+    tourist_ID    int not null auto_increment,
+    tourist_name  varchar(30),
+    id_card       int,
+    year_of_birth int,
+    city_id       int,
+    primary key (tourist_Id, id_card),
+    foreign key (city_id) references City (city_ID)
+);
+
+create table Tour
+(
+    tour_ID     int auto_increment primary key,
+    tour_code   varchar(20) unique,
+    type_id     int unique,
+    cost_to_des double,
+    startDate   date,
+    endDate     date,
+    foreign key (tour_code) references TourTypes (tour_code),
+    foreign key (type_id) references TourTypes (type_ID)
+);
+
+create table TourTypes
+(
+    type_ID   int not null unique auto_increment,
+    tour_code varchar(20) unique primary key,
+    type_name varchar(30)
+);
+
+create table Tour_bill
+(
+    bill_ID    int primary key auto_increment,
+    tour_id    int,
+    tourist_id int,
+    status     bit(2),
+    foreign key (tour_id) references Tour (tour_ID),
+    foreign key (tourist_id) references Tourist (tourist_ID)
+);
