@@ -22,7 +22,7 @@ create table Tourist
     tourist_ID    int not null auto_increment,
     tourist_name  varchar(30),
     id_card       int,
-    year_of_birth int,
+    year_of_birth year,
     city_id       int,
     primary key (tourist_Id, id_card),
     foreign key (city_id) references City (city_ID)
