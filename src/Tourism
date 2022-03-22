@@ -19,12 +19,11 @@ create table City
 
 create table Tourist
 (
-    tourist_ID    int not null auto_increment,
+    tourist_ID    int primary key auto_increment,
     tourist_name  varchar(30),
-    id_card       int,
+    id_card       int unique,
     year_of_birth year,
     city_id       int,
-    primary key (tourist_Id, id_card),
     foreign key (city_id) references City (city_ID)
 );
 
@@ -36,14 +35,13 @@ create table Tour
     cost_to_des double,
     startDate   date,
     endDate     date,
-    foreign key (tour_code) references TourTypes (tour_code),
     foreign key (type_id) references TourTypes (type_ID)
 );
 
 create table TourTypes
 (
-    type_ID   int not null unique auto_increment,
-    tour_code varchar(20) unique primary key,
+    type_ID   int primary key auto_increment,
+    type_code varchar(20) unique,
     type_name varchar(30)
 );
 
